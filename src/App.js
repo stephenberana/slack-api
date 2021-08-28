@@ -1,23 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import UserRegistration from "./UserRegistration";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {/* <form className="registration" onSubmit={() => UserRegistration}>
+        <h1>User Registration</h1>
+        <input
+          type="email"
+          className="email"
+          placeholder="Enter your username"
+        ></input>
+        <br />
+        <input
+          type="password"
+          className="password"
+          placeholder="Enter your password"
+        ></input>
+        <br />
+        <input
+          type="password"
+          className="password2"
+          placeholder="Confirm your password"
+        ></input>
+        <br />
+        <button type="submit">Submit</button>
+      </form> */}
+
+      <UserRegistration />
     </div>
   );
 }
