@@ -1,12 +1,12 @@
 import axios from "axios";
 import React, { useState } from "react";
 
-export default function UserRegistration(props) {
+export default function UserRegistration() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [password_confirmation, setPasswordConfirmation] = useState("");
 
-  console.log(email, password, password_confirmation);
+  // console.log(email, password, password_confirmation);
 
   // const { register, handleSubmit } = useForm();
   // const onSubmit = (data) => {
@@ -16,21 +16,25 @@ export default function UserRegistration(props) {
   function onUserRegistration(e) {
     e.preventDefault();
     const postData = {
-      email,
-      password,
-      password_confirmation,
+      Email: email,
+      Password: password,
+      "Confirm password": password_confirmation,
     };
 
+    const parsedPostData = JSON.parse(JSON.stringify(postData));
+
+    console.log(postData);
     const config = {
       headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
+        "Content-Type": "application/x-www-form-urlencoded, charset=UTF-8",
+        Accept: "application/json",
       },
     };
 
     axios
       .post({
         url: "http://206.189.91.54/api/v1/auth",
-        data: postData,
+        data: parsedPostData,
         headers: config,
       })
       .then((response) => {
@@ -75,12 +79,12 @@ export default function UserRegistration(props) {
       <input
         type="password"
         name="password_confirmation"
-        value={password}
+        value={password_confirmation}
         onChange={(e) => setPasswordConfirmation(e.target.value)}
         placeholder="Confirm password"
       />
 
-      <button type="submit" onSubmit={() => passwordConfirmation}>
+      <button type="submit" onClick={() => passwordConfirmation}>
         Submit
       </button>
     </form>
