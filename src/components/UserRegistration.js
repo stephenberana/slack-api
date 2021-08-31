@@ -18,17 +18,17 @@ export default function UserRegistration() {
 
   const submitForm = (data) => {
     const postData = {
-      Email: email,
-      Password: password,
-      "Confirm password": password_confirmation,
+      email: email,
+      password: password,
+      password_confirmation: password_confirmation,
     };
     console.log(postData);
-    axios
-      .post({
-        url: "http://206.189.91.54/api/v1/auth",
-        data: JSON.stringify(postData),
-        headers: config,
-      })
+    axios({
+      url: "http://206.189.91.54/api/v1/auth",
+      method: "POST",
+      data: postData,
+      headers: config,
+    })
       .then((response) => {
         console.log(response);
         console.log(data);
@@ -41,7 +41,7 @@ export default function UserRegistration() {
   const config = {
     headers: {
       "Content-Type": "application/x-www-form-urlencoded, charset=UTF-8",
-      Accept: "application/json",
+      "Accept": "application/json",
     },
   };
 
@@ -91,7 +91,7 @@ export default function UserRegistration() {
         placeholder="Confirm password"
       />
 
-      <button type="submit" onClick={handleSubmit}>
+      <button type="submit">
         Submit
       </button>
     </form>

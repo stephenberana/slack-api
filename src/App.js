@@ -1,4 +1,5 @@
-import UserRegistration from "./UserRegistration";
+import UserRegistration from "./components/UserRegistration";
+import Login from "./components/Login";
 
 function App() {
   return (
@@ -26,7 +27,9 @@ function App() {
         <button type="submit">Submit</button>
       </form> */}
 
-      <UserRegistration />
+      {/* <UserRegistration /> */}
+      <Login />
+
     </div>
   );
 }
