@@ -1,19 +1,20 @@
-import {useState, React} from "react";
+import { useRef, React } from "react";
 import axios from "axios";
 import { useForm } from "react-hook-form";
 
 const Login = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const email = useRef(null);
+  const password = useRef(null);
 
   const { handleSubmit } = useForm({});
 
   const submitForm = (data) => {
     const postData = {
-      email: email,
-      password: password,
+      email: email.current.value,
+      password: password.current.value,
     };
     console.log(postData);
+
     axios({
       url: "http://206.189.91.54/api/v1/auth/sign_in",
       method: "POST",
@@ -22,6 +23,10 @@ const Login = () => {
     })
       .then((response) => {
         console.log(response);
+        console.log(response.headers.uid);
+        console.log(response.headers.expiry);
+        console.log(response.headers.access - token);
+        console.log(response.headers.client);
         console.log(data);
       })
       .catch(function (error) {
@@ -32,7 +37,7 @@ const Login = () => {
   const config = {
     headers: {
       "Content-Type": "application/x-www-form-urlencoded, charset=UTF-8",
-      "Accept": "application/json",
+      Accept: "application/json",
     },
   };
 
@@ -43,10 +48,7 @@ const Login = () => {
         <input
           type="email"
           name="email"
-          value={email}
-          onChange={(e) =>
-            setEmail(e.target.value) || console.log(`Email`, e.target.value)
-          }
+          ref={email}
           placeholder="Enter your email"
         />
         <br />
@@ -55,20 +57,14 @@ const Login = () => {
         <input
           type="password"
           name="password"
-          value={password}
-          onChange={(e) =>
-            setPassword(e.target.value) ||
-            console.log("Password", e.target.value)
-          }
+          ref={password}
           placeholder="Input password"
         />
 
         <span>
           New to Avion Slack? <a href="register-link">Register here.</a>
         </span>
-        <button type="submit">
-        Submit
-      </button>
+        <button type="submit">Submit</button>
       </form>
     </div>
   );

@@ -1,11 +1,11 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useRef } from "react";
 import { useForm } from "react-hook-form";
 
 export default function UserRegistration() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [password_confirmation, setPasswordConfirmation] = useState("");
+  const email = useRef(null);
+  const password = useRef(null);
+  const password_confirmation = useRef(null);
 
   // console.log(email, password, password_confirmation);
 
@@ -14,13 +14,13 @@ export default function UserRegistration() {
   //   console.log(data);
   // };
 
-  const { handleSubmit } = useForm({});
+  const { handleSubmit } = useForm();
 
   const submitForm = (data) => {
     const postData = {
-      email: email,
-      password: password,
-      password_confirmation: password_confirmation,
+      email: email.current.value,
+      password: password.current.value,
+      password_confirmation: password_confirmation.current.value,
     };
     console.log(postData);
     axios({
@@ -41,7 +41,7 @@ export default function UserRegistration() {
   const config = {
     headers: {
       "Content-Type": "application/x-www-form-urlencoded, charset=UTF-8",
-      "Accept": "application/json",
+      Accept: "application/json",
     },
   };
 
@@ -55,25 +55,14 @@ export default function UserRegistration() {
   return (
     <form onSubmit={handleSubmit(submitForm)}>
       <label>Email</label>
-      <input
-        type="email"
-        name="email"
-        value={email}
-        onChange={(e) =>
-          setEmail(e.target.value) || console.log(`Email`, e.target.value)
-        }
-        placeholder="Input email"
-      />
+      <input type="email" name="email" ref={email} placeholder="Input email" />
       <br />
 
       <label>Password</label>
       <input
         type="password"
         name="password"
-        value={password}
-        onChange={(e) =>
-          setPassword(e.target.value) || console.log("Password", e.target.value)
-        }
+        ref={password}
         placeholder="Input password"
       />
 
@@ -83,17 +72,11 @@ export default function UserRegistration() {
       <input
         type="password"
         name="password_confirmation"
-        value={password_confirmation}
-        onChange={(e) =>
-          setPasswordConfirmation(e.target.value) ||
-          console.log("Confirm password", e.target.value)
-        }
+        ref={password_confirmation}
         placeholder="Confirm password"
       />
 
-      <button type="submit">
-        Submit
-      </button>
+      <button type="submit">Submit</button>
     </form>
   );
 }
