@@ -2,23 +2,25 @@ import { useRef, React } from "react";
 import axios from "axios";
 import { useForm } from "react-hook-form";
 
-const Login = (props) => {
-  const email = useRef(null);
-  const password = useRef(null);
+const SendMessage = (props) => {
+  const receiver = useRef(null);
+  const receiverclass = useRef(null);
+  const body = useRef(null);
 
   const { handleSubmit } = useForm({});
 
   const submitForm = (data) => {
-    const postData = {
-      email: email.current.value,
-      password: password.current.value,
+    const messageLog = {
+      receiver_id: parseInt(receiver.current.value),
+      receiver_class: receiverclass.current.value,
+      body: body.current.value,
     };
-    console.log(postData);
+    console.log(messageLog);
 
     axios({
-      url: "http://206.189.91.54/api/v1/auth/sign_in",
+      url: "http://206.189.91.54/api/v1/auth/messages",
       method: "POST",
-      data: postData,
+      data: messageLog,
       headers: config,
     })
       .then((response) => {
@@ -47,30 +49,30 @@ const Login = (props) => {
   return (
     <div>
       <form onSubmit={handleSubmit(submitForm)}>
-        <label>Email</label>
+        <label>Message</label>
         <input
-          type="email"
-          name="email"
-          ref={email}
-          placeholder="Enter your email"
+          type="text"
+          name="sendtext"
+          ref={body}
+          placeholder="Enter your message here."
+        />
+        <input
+          type="number"
+          name="receiver"
+          ref={receiver}
+          placeholder="Enter UID of receiver."
+        />
+        <input
+          type="text"
+          name="receiverclass"
+          ref={receiverclass}
+          placeholder="Enter user class."
         />
         <br />
-
-        <label>Password</label>
-        <input
-          type="password"
-          name="password"
-          ref={password}
-          placeholder="Input password"
-        />
-
-        <span>
-          New to Avion Slack? <a href="register-link">Register here.</a>
-        </span>
-        <button type="submit">Submit</button>
+        <button type="submit">Send!</button>
       </form>
     </div>
   );
 };
 
-export default Login;
+export default SendMessage;

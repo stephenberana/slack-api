@@ -1,5 +1,7 @@
 import UserRegistration from "./components/UserRegistration";
 import Login from "./components/Login";
+import SendMessage from "./components/SendMessage";
+
 
 function App() {
   return (
@@ -29,6 +31,7 @@ function App() {
 
       {/* <UserRegistration /> */}
       <Login />
+      <SendMessage />
 
     </div>
   );
