@@ -2,7 +2,7 @@ import { useRef, React } from "react";
 import axios from "axios";
 import { useForm } from "react-hook-form";
 
-const Login = () => {
+const Login = (props) => {
   const email = useRef(null);
   const password = useRef(null);
 
@@ -23,9 +23,13 @@ const Login = () => {
     })
       .then((response) => {
         console.log(response);
+        props.setAccessToken(response.headers["access-token"])
+        props.setUid(response.headers.uid)
+        props.setExpiry(response.headers.expiry)
+        props.setClient(response.headers.client)
+        console.log(response.headers["access-token"]);
         console.log(response.headers.uid);
         console.log(response.headers.expiry);
-        console.log(response.headers.access - token);
         console.log(response.headers.client);
         console.log(data);
       })
