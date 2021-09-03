@@ -1,38 +1,18 @@
+import React from "react";
+import { useState } from "react";
 import UserRegistration from "./components/UserRegistration";
 import Login from "./components/Login";
 import SendMessage from "./components/SendMessage";
-
+export const API = "http://206.189.91.54";
 
 function App() {
+  const [loginHeaders, setLoginHeaders] = useState({});
+
   return (
     <div className="App">
-      {/* <form className="registration" onSubmit={() => UserRegistration}>
-        <h1>User Registration</h1>
-        <input
-          type="email"
-          className="email"
-          placeholder="Enter your username"
-        ></input>
-        <br />
-        <input
-          type="password"
-          className="password"
-          placeholder="Enter your password"
-        ></input>
-        <br />
-        <input
-          type="password"
-          className="password2"
-          placeholder="Confirm your password"
-        ></input>
-        <br />
-        <button type="submit">Submit</button>
-      </form> */}
-
       {/* <UserRegistration /> */}
-      <Login />
-      <SendMessage />
-
+      <Login setLoginHeaders={setLoginHeaders} />
+      {/* <SendMessage /> */}
     </div>
   );
 }
