@@ -1,6 +1,8 @@
-import { useRef, React } from "react";
+import { useRef, useState, React } from "react";
 import axios from "axios";
 import { useForm } from "react-hook-form";
+import "./login-registration.css";
+import { API } from "../App";
 
 const Login = (props) => {
   const email = useRef(null);
@@ -9,28 +11,21 @@ const Login = (props) => {
   const { handleSubmit } = useForm({});
 
   const submitForm = (data) => {
-    const postData = {
+    const user = {
       email: email.current.value,
       password: password.current.value,
     };
-    console.log(postData);
+    console.log(user);
 
     axios({
-      url: "http://206.189.91.54/api/v1/auth/sign_in",
+      url: `${API}/api/v1/auth/sign_in`,
       method: "POST",
-      data: postData,
+      data: user,
       headers: config,
     })
       .then((response) => {
-        console.log(response);
-        console.log(response.headers.uid);
-        console.log(response.headers.expiry);
-        console.log(response.headers.client);
-        console.log(data);
-        props.setAccessToken(response.headers["access-token"])
-        props.setUid(response.headers.uid)
-        props.setExpiry(response.headers.expiry)
-        props.setClient(response.headers)
+        props.setLoginHeaders(response.headers);
+        console.log(response.headers);
       })
       .catch(function (error) {
         console.log(error);
@@ -45,30 +40,40 @@ const Login = (props) => {
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit(submitForm)}>
-        <label>Email</label>
-        <input
-          type="email"
-          name="email"
-          ref={email}
-          placeholder="Enter your email"
-        />
-        <br />
+    <div className="login-container">
+      <div className="column1"></div>
+      <div className="column2">
+        <form className="form" onSubmit={handleSubmit(submitForm)}>
+          <label className="login-label">Email</label>
+          <input
+            style={{ marginTop: "16px" }}
+            className="inputField"
+            type="email"
+            name="email"
+            ref={email}
+            placeholder="Enter your email"
+          />
+          <br />
 
-        <label>Password</label>
-        <input
-          type="password"
-          name="password"
-          ref={password}
-          placeholder="Input password"
-        />
+          <label className="login-label">Password</label>
+          <input
+            className="inputField"
+            type="password"
+            name="password"
+            ref={password}
+            placeholder="Input password"
+          />
 
-        <span>
-          New to Avion Slack? <a href="register-link">Register here.</a>
-        </span>
-        <button type="submit">Submit</button>
-      </form>
+          <span className="login-label">
+            New to Maroons Slack?
+            <br />
+            <a href="register-link">Register here.</a>
+          </span>
+          <button className="login-submit" type="submit">
+            Submit
+          </button>
+        </form>
+      </div>
     </div>
   );
 };

@@ -1,19 +1,13 @@
 import axios from "axios";
 import React, { useRef } from "react";
 import { useForm } from "react-hook-form";
+import { API } from "../App";
+import "./login-registration.css";
 
-export default function UserRegistration() {
+export default function UserRegistration(props) {
   const email = useRef(null);
   const password = useRef(null);
   const password_confirmation = useRef(null);
-
-  // console.log(email, password, password_confirmation);
-
-  // const { register, handleSubmit } = useForm();
-  // const onSubmit = (data) => {
-  //   console.log(data);
-  // };
-
   const { handleSubmit } = useForm();
 
   const submitForm = (data) => {
@@ -24,7 +18,7 @@ export default function UserRegistration() {
     };
     console.log(postData);
     axios({
-      url: "http://206.189.91.54/api/v1/auth",
+      url: `${API}/api/v1/auth`,
       method: "POST",
       data: postData,
       headers: config,
@@ -45,38 +39,56 @@ export default function UserRegistration() {
     },
   };
 
-  // const passwordConfirmation = (password, password_confirmation) => {
-  //   if (password !== password_confirmation) {
-  //     alert("Please make sure that both passwords match.");
-  //     return false;
-  //   } else return true;
-  // };
+  const passwordConfirmation = (password, password_confirmation) => {
+    if (password !== password_confirmation) {
+      alert("Please make sure that both passwords match.");
+      return false;
+    } else return true;
+  };
 
   return (
-    <form onSubmit={handleSubmit(submitForm)}>
-      <label>Email</label>
-      <input type="email" name="email" ref={email} placeholder="Input email" />
-      <br />
+    <div className="register-container">
+      <img src="./images/UPlogo.png" />
+      <form className="form" onSubmit={handleSubmit(submitForm)}>
+        <span className="title">University of the Philippines </span>
+        <label className="register-label">Email</label>
+        <input
+          className="inputField"
+          type="email"
+          name="email"
+          ref={email}
+          placeholder="Input email"
+        />
+        <br />
 
-      <label>Password</label>
-      <input
-        type="password"
-        name="password"
-        ref={password}
-        placeholder="Input password"
-      />
+        <label className="register-label">Password</label>
+        <input
+          className="inputField"
+          type="password"
+          name="password"
+          ref={password}
+          placeholder="Input password"
+        />
 
-      <br />
+        <br />
 
-      <label>Confirm Password</label>
-      <input
-        type="password"
-        name="password_confirmation"
-        ref={password_confirmation}
-        placeholder="Confirm password"
-      />
+        <label className="register-label">Confirm Password</label>
+        <input
+          className="inputField"
+          type="password"
+          name="password_confirmation"
+          ref={password_confirmation}
+          placeholder="Confirm password"
+          onSubmit={() => passwordConfirmation}
+        />
 
-      <button type="submit">Submit</button>
-    </form>
+        <span>
+          Already a member? <a href="./">Login here.</a>
+        </span>
+        <button className="register-submit" type="submit">
+          Submit
+        </button>
+      </form>
+    </div>
   );
 }
