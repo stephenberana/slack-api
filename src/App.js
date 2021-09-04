@@ -1,20 +1,10 @@
 import React from "react";
-import { useState } from "react";
-import UserRegistration from "./components/UserRegistration";
-import Login from "./components/Login";
-import SendMessage from "./components/SendMessage";
+import { useAuth } from "./AuthContext";
+import { AuthenticatedRoutes, UnauthenticatedRoutes } from "./Routes";
 export const API = "http://206.189.91.54";
 
-function App() {
-  const [loginHeaders, setLoginHeaders] = useState({});
+export default function App() {
+  const { loggedIn } = useAuth();
 
-  return (
-    <div className="App">
-      {/* <UserRegistration /> */}
-      <Login setLoginHeaders={setLoginHeaders} />
-      {/* <SendMessage /> */}
-    </div>
-  );
+  return loggedIn ? <AuthenticatedRoutes /> : <UnauthenticatedRoutes />;
 }
-
-export default App;

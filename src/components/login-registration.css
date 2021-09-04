@@ -113,3 +113,12 @@ body, html, #root, .app {
 .title {
   font-family: 'PT serif', serif
 }
+
+.reglogo-container {
+  width: 50%;
+}
+
+.reglogo {
+  width: 90%;
+  height: 90%;
+}

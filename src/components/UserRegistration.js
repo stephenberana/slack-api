@@ -3,6 +3,7 @@ import React, { useRef } from "react";
 import { useForm } from "react-hook-form";
 import { API } from "../App";
 import "./login-registration.css";
+import UPlogo from "./images/UPlogo.jpg";
 
 export default function UserRegistration(props) {
   const email = useRef(null);
@@ -48,9 +49,10 @@ export default function UserRegistration(props) {
 
   return (
     <div className="register-container">
-      <img src="./images/UPlogo.png" />
+      <div className="reglogo-container">
+        <img className="reglogo" src={UPlogo} />
+      </div>
       <form className="form" onSubmit={handleSubmit(submitForm)}>
-        <span className="title">University of the Philippines </span>
         <label className="register-label">Email</label>
         <input
           className="inputField"

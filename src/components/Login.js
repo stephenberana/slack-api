@@ -3,8 +3,10 @@ import axios from "axios";
 import { useForm } from "react-hook-form";
 import "./login-registration.css";
 import { API } from "../App";
+import { useAuth } from "../AuthContext";
 
 const Login = (props) => {
+  const { login } = useAuth();
   const email = useRef(null);
   const password = useRef(null);
 
@@ -69,7 +71,7 @@ const Login = (props) => {
             <br />
             <a href="register-link">Register here.</a>
           </span>
-          <button className="login-submit" type="submit">
+          <button className="login-submit" type="submit" onClick={login}>
             Submit
           </button>
         </form>

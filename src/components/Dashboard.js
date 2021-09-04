@@ -1,11 +1,12 @@
 import React from "react";
-import { API } from "../../App";
-import { useState, useEffect } from "react";
+import { API } from "../App";
+import { useRef, useState, useEffect } from "react";
 import axios from "axios";
+import { useAuth } from "../AuthContext";
 
 const Dashboard = (props) => {
-//   const [user, setUser] = useState({});
-  const { id, member_id } = useRef(null)
+  const [user, setUser] = useState({});
+  const { id, member_id } = useRef(null);
   const [channel, setChannel] = useState({});
 
   const config = {
@@ -17,12 +18,11 @@ const Dashboard = (props) => {
     },
   };
 
-  const userSession = () => {
+  const UserSession = () => {
     const getUser = (data) => {
       axios({
-        url: `${API}/api/v1/channels`,
+        url: `${API}/api/v1/users`,
         method: "GET",
-        data: user,
         headers: config,
       })
         .then((response) => {
@@ -40,7 +40,7 @@ const Dashboard = (props) => {
   };
 
   //channel functions
-  const channel = () => {
+  const ChannelFunc = () => {
     const getChannel = (data) => {
       axios({
         url: `${API}/api/v1/channels`,
@@ -62,31 +62,31 @@ const Dashboard = (props) => {
 
     //inviting user to a channel
     const createChannel = (data) => {
-        const user = {
-            id = id.current.value,
-            member_id = member_id.current.value
-        }
-        axios({
-            url: `${API}/api/v1/channel/add_member`,
-            method: 'POST',
-            data: user,
-            headers: config,
+      const user = {
+        id: id.current.value,
+        member_id: member_id.current.value,
+      };
+      axios({
+        url: `${API}/api/v1/channel/add_member`,
+        method: "POST",
+        data: user,
+        headers: config,
+      })
+        .then((response) => {
+          console.log(response.headers);
         })
-            .then((response) => {
-                console.log(response.headers)
-            })
-            .catch(function (error) {
-                console.log(error);
-              });
-          };
-    }
-
-    return (
-      <div>
-        <getUser userSession={userSession} />
-        <renderChannel channel={channel} />
-      </div>
-    );
+        .catch(function (error) {
+          console.log(error);
+        });
+    };
   };
+
+  return (
+    <div>
+      <getUser UserSession={UserSession} />
+      <renderChannel channel={channel} />
+    </div>
+  );
+};
 
 export default Dashboard;
