@@ -39,6 +39,7 @@ export const UserContextProvider = (props) => {
 
   console.log(data);
 
+  //uid
   uid = userHeaders.uid;
   console.log(uid);
 
@@ -75,21 +76,21 @@ export const UserContextProvider = (props) => {
   }, [channelMessage]);
 
   // retrieving all messages with a user
-  const [userMessage, setUserMessage] = useState([]);
-  useEffect(() => {
-    axios({
-      url: `${API}/v1/messages?receiver_id=${uid}&receiver_class=User`,
-      method: "GET",
-      headers: userHeaders,
-    })
-      .then((response) => {
-        console.log(response.headers);
-        setUserMessage(response.userMessage);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  }, [userMessage]);
+  // const [userMessage, setUserMessage] = useState([]);
+  // useEffect(() => {
+  //   axios({
+  //     url: `${API}/v1/messages?receiver_id=${uid}&receiver_class=User`,
+  //     method: "GET",
+  //     headers: userHeaders,
+  //   })
+  //     .then((response) => {
+  //       console.log(response.headers);
+  //       setUserMessage(response.userMessage);
+  //     })
+  //     .catch(function (error) {
+  //       console.log(error);
+  //     });
+  // }, [userMessage]);
 
   // creating Channel
 
