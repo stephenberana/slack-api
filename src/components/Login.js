@@ -3,12 +3,11 @@ import axios from "axios";
 import { useForm } from "react-hook-form";
 import "./login-registration.css";
 import { API } from "../App";
-import { useAuth } from "../AuthContext";
 
 const Login = (props) => {
-  const { login } = useAuth();
   const email = useRef(null);
   const password = useRef(null);
+  var loginHeaders = useRef(null);
 
   const { handleSubmit } = useForm({});
 
@@ -26,8 +25,9 @@ const Login = (props) => {
       headers: config,
     })
       .then((response) => {
-        props.setLoginHeaders(response.headers);
-        console.log(response.headers);
+        loginHeaders = response.headers;
+        console.log(loginHeaders);
+        localStorage.setItem("loginHeaders", JSON.stringify(loginHeaders));
       })
       .catch(function (error) {
         console.log(error);
@@ -71,7 +71,7 @@ const Login = (props) => {
             <br />
             <a href="register-link">Register here.</a>
           </span>
-          <button className="login-submit" type="submit" onClick={login}>
+          <button className="login-submit" type="submit">
             Submit
           </button>
         </form>

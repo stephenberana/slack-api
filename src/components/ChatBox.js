@@ -29,10 +29,10 @@ const SendMessage = (props) => {
         console.log(response.headers.expiry);
         console.log(response.headers.client);
         console.log(data);
-        props.setAccessToken(response.headers["access-token"])
-        props.setUid(response.headers.uid)
-        props.setExpiry(response.headers.expiry)
-        props.setClient(response.headers)
+        props.setAccessToken(response.headers["access-token"]);
+        props.setUid(response.headers.uid);
+        props.setExpiry(response.headers.expiry);
+        props.setClient(response.headers);
       })
       .catch(function (error) {
         console.log(error);
@@ -69,7 +69,7 @@ const SendMessage = (props) => {
           placeholder="Enter user class."
         />
         <br />
-        <button type="submit">Send!</button>
+        <button type="submit">Send</button>
       </form>
     </div>
   );
