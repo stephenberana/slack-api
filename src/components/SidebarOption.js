@@ -1,8 +1,32 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
+import { UserContext } from "../Context";
 
 const SidebarOption = ({ Icon, title, addChannelOption }) => {
-  const addChannel = () => {
+  const { data } = useContext(UserContext);
+
+  //adding channels
+  const addChannel = (data) => {
+    const channelName = prompt("Please enter the channel name.");
+    const user = {
+      id: id.current.value,
+      member_id: member_id.current.value,
+    };
+
+    if (channelName) {
+      axios({
+        url: `${API}/api/v1/channel/add_member`,
+        method: "POST",
+        data: user,
+        headers: userHeaders,
+      })
+        .then((response) => {
+          console.log(response.headers);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    }
     //modal input?
   };
 
