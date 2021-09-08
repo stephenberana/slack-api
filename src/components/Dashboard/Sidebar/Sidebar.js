@@ -24,6 +24,7 @@ const Sidebar = () => {
       </SidebarHeader>
       <button onClick={() => setShow(true)}>Add Channel</button><Modal title="Add Channel" onClose={() => setShow(false)} show={show}><AddChannel /></Modal>
       <ChannelsCollapsible></ChannelsCollapsible>
+      <div id="channel-list"></div>
       <button onClick={() => setShowDM(true)}>New Direct Message</button><Modal title="My Modal" onClose={() => setShowDM(false)} showDM={showDM}><AddDM /></Modal>
       <DMCollapsible></DMCollapsible>
     </SidebarContainer>
