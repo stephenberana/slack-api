@@ -23,7 +23,7 @@ import { API } from "../App.js";
       console.log(channel);
   
       axios({
-        url: `${API}/api/v1/channel/add_member?name=${channel.name}1&user_ids=[${channel.user_ids}]`, 
+        url: `${API}/api/v1/channels`, 
         method: "POST",
         data: channel,
         headers: userHeaders.data.headers,

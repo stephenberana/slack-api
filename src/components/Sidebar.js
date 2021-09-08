@@ -15,6 +15,7 @@ import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import AddIcon from "@material-ui/icons/Add";
 import AddChannel from "./AddChannel"
+import ChannelList from "./ChannelList"
 
 const Sidebar = () => {
   return (
@@ -42,6 +43,7 @@ const Sidebar = () => {
       <hr />
 
       <SidebarOption Icon={ExpandMoreIcon} title="Channels" />
+      <ChannelList />
 
       <hr />
 
