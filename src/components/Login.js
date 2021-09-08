@@ -8,6 +8,7 @@ const Login = (props) => {
   const email = useRef(null);
   const password = useRef(null);
   var loginHeaders = useRef(null);
+  var loginData = useRef(null);
 
   const { handleSubmit } = useForm({});
 
@@ -25,9 +26,12 @@ const Login = (props) => {
       headers: config,
     })
       .then((response) => {
+        console.log(response)
         loginHeaders = response.headers;
+        loginData = response.data;
         console.log(loginHeaders);
         localStorage.setItem("loginHeaders", JSON.stringify(loginHeaders));
+        localStorage.setItem("loginData", JSON.stringify(loginData));
       })
       .catch(function (error) {
         console.log(error);

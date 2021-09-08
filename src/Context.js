@@ -13,12 +13,12 @@ export const UserContextProvider = (props) => {
   var { id, member_id, uid, client, expiry } = useRef(null);
 
   var userHeaders = useRef(null);
+  var userData = useRef(null);
   userHeaders = JSON.parse(localStorage.getItem("loginHeaders"));
-  console.log(userHeaders);
+  userData = JSON.parse(localStorage.getItem("loginData"));
   var config = {
     headers: userHeaders,
   };
-  console.log(config);
 
   //setting user session
   const [data, setData] = useState([]);
@@ -29,7 +29,6 @@ export const UserContextProvider = (props) => {
       headers: userHeaders,
     })
       .then((response) => {
-        console.log(response.headers);
         setData(response);
       })
       .catch(function (error) {
@@ -37,26 +36,26 @@ export const UserContextProvider = (props) => {
       });
   }, []);
 
-  console.log(data);
-
   //uid
   uid = userHeaders.uid;
-  console.log(uid);
 
   //retrieving channels where client is invited
   const [channel, setChannel] = useState([]);
   useEffect(() => {
     axios({
-      url: `${API}/api/v1/channels`,
+      url: `${API}/api/v1/channels/${id}`,
       method: "GET",
       headers: userHeaders,
     })
       .then((response) => {
-        console.log(response.headers);
-        setChannel(response.channel);
+        console.log("this is the id: " + userData.data.id)
+        id = userData.data.id      
+        console.log("these are the channels")
+        console.log(response)
+        setChannel(response.data);
       })
       .catch((error) => console.log(error));
-  }, [channel]);
+  }, []);
 
   // retrieving all messages in a channel
   const [channelMessage, setChannelMessage] = useState([]);
@@ -67,7 +66,6 @@ export const UserContextProvider = (props) => {
       headers: userHeaders,
     })
       .then((response) => {
-        console.log(response.headers);
         setChannelMessage(response.channelMessage);
       })
       .catch(function (error) {

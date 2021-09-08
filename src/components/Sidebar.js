@@ -14,6 +14,7 @@ import AppsIcon from "@material-ui/icons/Apps";
 import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import AddIcon from "@material-ui/icons/Add";
+import AddChannel from "./AddChannel"
 
 const Sidebar = () => {
   return (
@@ -44,7 +45,8 @@ const Sidebar = () => {
 
       <hr />
 
-      <SidebarOption Icon={AddIcon} addChannelOption title="Add Channel" />
+      <SidebarOption Icon={AddIcon} addChannelOption title="Add Channel"></SidebarOption>
+      <AddChannel />
     </SidebarContainer>
   );
 };

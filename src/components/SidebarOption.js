@@ -1,34 +1,45 @@
-import React, { useContext } from "react";
+import React, { useContext, useRef } from "react";
+import axios from "axios";
 import styled from "styled-components";
+import { useForm } from "react-hook-form";
 import { UserContext } from "../Context";
+import { API } from "../App.js";
+import PopUp from "./Popup";
+
 
 const SidebarOption = ({ Icon, title, addChannelOption }) => {
+ 
   const { data } = useContext(UserContext);
+  var userHeaders = useContext(UserContext);
 
   //adding channels
-  const addChannel = (data) => {
-    const channelName = prompt("Please enter the channel name.");
-    const user = {
-      id: id.current.value,
-      member_id: member_id.current.value,
-    };
 
-    if (channelName) {
-      axios({
-        url: `${API}/api/v1/channel/add_member`,
-        method: "POST",
-        data: user,
-        headers: userHeaders,
-      })
-        .then((response) => {
-          console.log(response.headers);
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-    }
-    //modal input?
-  };
+  // const addChannel = (data) => {
+  //   var id = null;
+  //   var member_id = null;
+  //   var 
+  //   const channelName = prompt("Please enter the channel name.");
+  //   const user = {
+  //     id: id.current.value,
+  //     member_id: member_id.current.value,
+  //     };
+
+  //   if (channelName) {
+  //     axios({
+  //       url: `${API}/api/v1/channel/add_member`,
+  //       method: "POST",
+  //       data: user,
+  //       headers: userHeaders,
+  //     })
+  //       .then((response) => {
+  //         console.log(response.headers);
+  //       })
+  //       .catch(function (error) {
+  //         console.log(error);
+  //       });
+  //   }
+  //   //modal input?
+  // };
 
   const selectChannel = () => {
     //target channel value
@@ -36,7 +47,7 @@ const SidebarOption = ({ Icon, title, addChannelOption }) => {
 
   return (
     <SidebarOptionContainer
-      onClick={addChannelOption ? addChannel : selectChannel}
+      // onClick={addChannelOption ? AddChannel : selectChannel}
     >
       {Icon && <Icon fontSize="large" style={{ padding: 10 }} />}
       {title && <title style={{ color: "white" }} />}
@@ -45,6 +56,7 @@ const SidebarOption = ({ Icon, title, addChannelOption }) => {
       ) : (
         <SidebarOptionChannel>
           <span>#</span> {title}
+          <PopUp></PopUp>
         </SidebarOptionChannel>
       )}
     </SidebarOptionContainer>
