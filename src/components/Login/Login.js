@@ -2,7 +2,7 @@ import { useRef, useState, React } from "react";
 import axios from "axios";
 import { useForm } from "react-hook-form";
 import "./login-registration.css";
-import { API } from "../App";
+import { API } from "../../App";
 
 const Login = (props) => {
   const email = useRef(null);

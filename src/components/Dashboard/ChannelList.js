@@ -14,9 +14,7 @@ const sidebarChannelList = channelList.map((channel) =>
 
  const ChannelList = (props) => {
     return (
-      <div className="channel-container">
-        <p>{sidebarChannelList}</p>
-      </div>
+        <div className="channel-list">{sidebarChannelList}</div>
     );
   };
 

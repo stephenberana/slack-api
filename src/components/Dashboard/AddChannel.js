@@ -1,12 +1,10 @@
 import React, { useContext, useRef } from "react";
 import axios from "axios";
-import styled from "styled-components";
 import { useForm } from "react-hook-form";
-import { UserContext } from "../Context";
-import { API } from "../App.js";
+import { UserContext } from "../../Context";
+import { API } from "../../App.js";
 
  const AddChannel = (props) => {
-    const { data } = useContext(UserContext);
     var userHeaders = useContext(UserContext);
     var channelList = [];
     console.log(userHeaders.data.headers)  
@@ -44,7 +42,7 @@ import { API } from "../App.js";
       <div className="channel-container">
         <div className="channel"></div>
         <div className="channel">
-          <form className="form" onSubmit={handleSubmit(submitForm)}>
+          <form onSubmit={handleSubmit(submitForm)}>
             <label className="channel-label">Channel</label>
             <input
               style={{ marginTop: "16px" }}
@@ -56,17 +54,17 @@ import { API } from "../App.js";
             />
             <br />
   
-            <label className="channel-label">Name</label>
+            <label className="channel-label">Members</label>
             <input
               className="inputField"
               type="text"
               name="user_ids"
               ref={user_ids}
-              placeholder="Input user IDs"
+              placeholder="Input user IDs of members."
             />
   
             <button className="channel-submit" type="submit">
-              Submit
+              Create Channel
             </button>
           </form>
         </div>

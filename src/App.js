@@ -1,9 +1,10 @@
-import React, { useState } from "react";
-import UserRegistration from "./components/UserRegistration";
-import Login from "./components/Login";
-import Dashboard from "./components/Dashboard";
+import React from "react";
+import UserRegistration from "./components/UserRegistration/UserRegistration";
+import Login from "./components/Login/Login";
+import Dashboard from "./components/Dashboard/Dashboard";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { UserContextProvider } from "./Context";
+import "./App.css";
 
 export const API = "http://206.189.91.54";
 

@@ -1,0 +1,73 @@
+.modal {
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: all 0.3s ease-in-out;
+    pointer-events: none;
+  }
+  
+  .modal.enter-done {
+    opacity: 1;
+    pointer-events: visible;
+  }
+  
+  .modal.exit {
+    opacity: 0;
+  }
+  
+  .modal-content {
+    width: 80vw;
+    max-width: 500px;
+    background-color: #fff;
+    transition: all 0.3s ease-in-out;
+    transform: translateY(-200px);
+  }
+  
+  .modal.enter-done .modal-content {
+    transform: translateY(0);
+  }
+  
+  .modal.exit .modal-content {
+    transform: translateY(-200px);
+  }
+  
+  .modal-header{
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .modal-header button{
+    width: 30px;
+    height: 30px;
+    padding: 2px;
+    font-size: 15px;
+    font-weight: bold;
+    background-color: #6C1C29;
+    font-family: 'Urbanist';
+  }
+  
+  .modal-body {
+    padding: 10px;
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+  }
+  
+  button {
+    background-color: #00573e;
+    border-radius: 0;
+    font-family: 'Urbanist';
+  }
+
+  .channel-label {
+    color: #6C1C29;
+    font-family: 'Urbanist';
+    font-weight: bold;
+  }

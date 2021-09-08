@@ -10,15 +10,15 @@ const Header = () => {
     <HeaderContainer>
       {/* Header Left*/}
       <HeaderLeft>
-        <HeaderAvatar //TODO addonClick
-        />
+      <HelpOutlineIcon />
       </HeaderLeft>
-      <HeaderSearch>
+      {/* <HeaderSearch>
         <SearchIcon />
         <input placeholder="Search Maroons Slack" />
-      </HeaderSearch>
+      </HeaderSearch> */}
       <HeaderRight>
-        <HelpOutlineIcon />
+      <HeaderAvatar //TODO addonClick
+        />
       </HeaderRight>
     </HeaderContainer>
   );
@@ -32,17 +32,14 @@ const HeaderContainer = styled.div`
   width: 100%;
   align-items: center;
   justify-content: space-between;
-  padding: 10px 0;
   background-color: #7b1113;
   color: white;
+  z-index: 2;
+  padding: 1%;
 `;
 
 const HeaderLeft = styled.div`
-  flex: 0.3;
-  display: flex;
   align-items: center;
-  margin-left: 20px;
-
   > .MuiSvgIcon-root {
     margin-left: auto;
     margin-right: 30px;
@@ -50,29 +47,25 @@ const HeaderLeft = styled.div`
 `;
 
 const HeaderSearch = styled.div`
-  flex: 0.4;
   opacity: 1;
   border-radius: 6px;
   text-align: center;
   display: flex;
   padding: 0 50px;
-
+  height: 50px;
   > input {
     color: white;
-    height: 90%;
+    height: 80%;
     margin-top: 10px;
   }
-
   > .MuiSvgIcon-root {
     align-self: center;
   }
 `;
 
 const HeaderRight = styled.div`
-  flex: 0.3;
   display: flex;
   align-items: flex-end;
-
   > .MuiSvgIcon-root {
     margin-left: auto;
     margin-right: 20px;
@@ -82,7 +75,6 @@ const HeaderRight = styled.div`
 
 const HeaderAvatar = styled(Avatar)`
   cursor: pointer;
-
   :hover {
     opacity: 0.8;
   }

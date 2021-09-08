@@ -1,9 +1,9 @@
 import axios from "axios";
 import React, { useRef } from "react";
 import { useForm } from "react-hook-form";
-import { API } from "../App";
-import "./login-registration.css";
-import UPlogo from "./images/UPlogo.jpg";
+import { API } from "../../App";
+import "../Login/login-registration.css";
+import UPlogo from "../images/UPlogo.jpg";
 
 export default function UserRegistration(props) {
   const email = useRef(null);

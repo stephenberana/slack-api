@@ -49,7 +49,7 @@ body, html, #root, .app {
   }
 
   .column1 {
-    background-image: url(./images/Oblation.jpg);
+    background-image: url(../images/Oblation.jpg);
     float: right;
     width: 70vw;
     height:100vh;

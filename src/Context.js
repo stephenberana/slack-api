@@ -1,7 +1,6 @@
 import axios from "axios";
 import React, {
   useRef,
-  useContext,
   useState,
   createContext,
   useEffect,
@@ -10,16 +9,13 @@ import { API } from "./App.js";
 
 export const UserContext = createContext({});
 export const UserContextProvider = (props) => {
-  var { id, member_id, uid, client, expiry } = useRef(null);
+  var { id, member_id, uid } = useRef(null);
 
   var userHeaders = useRef(null);
   var userData = useRef(null);
   var userChannels = useRef(null);
   userHeaders = JSON.parse(localStorage.getItem("loginHeaders"));
   userData = JSON.parse(localStorage.getItem("loginData"));
-  var config = {
-    headers: userHeaders,
-  };
 
   //setting user session
   const [data, setData] = useState([]);
@@ -63,6 +59,7 @@ export const UserContextProvider = (props) => {
   // retrieving all messages in a channel
   const [channelMessage, setChannelMessage] = useState([]);
   useEffect(() => {
+    uid = userHeaders.uid;
     axios({
       url: `${API}/api/v1/messages?receiver_id=${uid}&receiver_class=Channel`,
       method: "GET",

@@ -1,8 +1,8 @@
 import React from "react";
-import { API } from "../App";
+import { API } from "../../App";
 import { useRef, useState, useEffect } from "react";
 import axios from "axios";
-import Sidebar from "./Sidebar";
+import Sidebar from "./Sidebar/Sidebar";
 import Header from "./Header";
 import styled from "styled-components";
 import Chat from "./Chat";
