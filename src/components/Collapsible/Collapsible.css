@@ -45,3 +45,7 @@
   background-color: #43111A;
   cursor: pointer;
 }
+
+.content {
+  overflow: scroll;
+}

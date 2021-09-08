@@ -10,7 +10,7 @@ import Chat from "./Chat";
 const Dashboard = (props) => {
   return (
     <DashBody>
-      <Header />
+      <Header /><br />
       <Chat />
       <Sidebar />
     </DashBody>

@@ -1,78 +1,63 @@
-import { useRef, React } from "react";
+import React, { useContext, useRef } from "react";
 import axios from "axios";
 import { useForm } from "react-hook-form";
+import { UserContext } from "../../Context";
+import { API } from "../../App.js";
 
-const SendMessage = (props) => {
-  const receiver = useRef(null);
-  const receiverclass = useRef(null);
-  const body = useRef(null);
-
-  const { handleSubmit } = useForm({});
-
-  const submitForm = (data) => {
-    const messageLog = {
-      receiver_id: parseInt(receiver.current.value),
-      receiver_class: receiverclass.current.value,
-      body: body.current.value,
-    };
-    console.log(messageLog);
-
-    axios({
-      url: "http://206.189.91.54/api/v1/auth/messages",
-      method: "POST",
-      data: messageLog,
-      headers: config,
-    })
-      .then((response) => {
-        console.log(response);
-        console.log(response.headers.uid);
-        console.log(response.headers.expiry);
-        console.log(response.headers.client);
-        console.log(data);
-        props.setAccessToken(response.headers["access-token"]);
-        props.setUid(response.headers.uid);
-        props.setExpiry(response.headers.expiry);
-        props.setClient(response.headers);
+ const ChatBox = (props) => {
+    var userHeaders = useContext(UserContext);
+    console.log(userHeaders.data.headers)  
+    const body = useRef(null);
+    const receiver_id = useRef(null);
+    const receiver_class = useRef(null);
+    
+  
+    const { handleSubmit } = useForm({});
+  
+    const submitForm = (data) => {
+      const message = {
+        receiver_id: JSON.parse(localStorage.getItem("receiverkey")),
+        receiver_class: localStorage.getItem("receiverclass"),
+        body: body.current.value,
+      };
+      console.log(message);
+  
+      axios({
+        url: `${API}/api/v1/messages?receiver_id=${message.receiver_id}&receiver_class=${message.receiver_class}&body=${message.body}`, 
+        method: "POST",
+        data: message,
+        headers: userHeaders.data.headers,
       })
-      .catch(function (error) {
-        console.log(error);
-      });
+        .then((response) => {
+          console.log(response);
+          console.log(message);
+        })
+        .catch(function (error) {
+          console.log("errorrr")
+          console.log(error);
+        });
+    };
+
+    return (
+      <div className="channel-container">
+        <div className="channel"></div>
+        <div className="channel">
+          <form onSubmit={handleSubmit(submitForm)}>
+            <label className="channel-label">Message</label>
+            <input
+              className="inputField"
+              type="text"
+              name="body"
+              ref={body}
+              placeholder="Input message here."
+            />
+            <button className="channel-submit" type="submit">
+              Send
+            </button>
+          </form>
+        </div>
+      </div>
+    );
   };
 
-  const config = {
-    headers: {
-      "Content-Type": "application/x-www-form-urlencoded, charset=UTF-8",
-      Accept: "application/json",
-    },
-  };
-
-  return (
-    <div>
-      <form onSubmit={handleSubmit(submitForm)}>
-        <label>Message</label>
-        <input
-          type="text"
-          name="sendtext"
-          ref={body}
-          placeholder="Enter your message here."
-        />
-        <input
-          type="number"
-          name="receiver"
-          ref={receiver}
-          placeholder="Enter UID of receiver."
-        />
-        <input
-          type="text"
-          name="receiverclass"
-          ref={receiverclass}
-          placeholder="Enter user class."
-        />
-        <br />
-        <button type="submit">Send</button>
-      </form>
-    </div>
-  );
-};
-
-export default SendMessage;
+  export default ChatBox;

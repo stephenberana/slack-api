@@ -24,6 +24,8 @@ const sidebarChannelList = channelList.map((channel) =>
  const GetChannelMessages = (e) => {
   console.log(e.target.getAttribute('data-key'));
   selectedChannel = e.target.getAttribute('data-key');
+  localStorage.setItem("receiverkey", selectedChannel);
+  localStorage.setItem("receiverclass", "Channel");
   var {userHeaders, userData} = false;
   userHeaders = JSON.parse(localStorage.getItem("loginHeaders"));
   userData = JSON.parse(localStorage.getItem("loginData"));

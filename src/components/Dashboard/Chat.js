@@ -2,11 +2,11 @@ import React from "react";
 import styled from "styled-components";
 import StarBorderOutlinedIcon from "@material-ui/icons/StarBorderOutlined";
 import InfoOutlinedIcon from "@material-ui/icons/InfoOutlined";
+import ChatBox from "./ChatBox"
 
 const Chat = () => {
   return (
-    <ChatContainer>
-      <h1>I am the chat screen!</h1>
+    <ChatContainer><br></br><br></br>
       <Header>
         <HeaderLeft>
           <h4>
@@ -20,6 +20,7 @@ const Chat = () => {
           </p>
         </HeaderRight>
       </Header>
+      <ChatBox />
     </ChatContainer>
   );
 };
@@ -27,16 +28,17 @@ const Chat = () => {
 export default Chat;
 
 const ChatContainer = styled.div`
-  flex: 0.7;
-  flex-grow: 1;
   overflow-y: scroll;
-  margin-top: 60px;
+  color: #000;
+  margin-left: 220px;
+  margin-right: 20px;
 `;
 
 const Header = styled.div`
   display: flex;
   justify-content: space-between;
   padding: 20px;
+  padding-top: 0px;
   border-bottom: 1px solid lightgray;
 `;
 

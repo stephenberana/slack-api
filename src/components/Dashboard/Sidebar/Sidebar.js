@@ -40,7 +40,7 @@ const SidebarContainer = styled.div`
   background-color: #561621;
   flex: 0.3;
   border-top: 1px solid #7b1113;
-  width: 20%;
+  width: 200px;
   min-width: 200px;
   position: fixed;
   padding-top: 70px;
