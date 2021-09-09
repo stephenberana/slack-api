@@ -9,6 +9,8 @@ const Login = (props) => {
   const password = useRef(null);
   var loginHeaders = useRef(null);
   var loginData = useRef(null);
+  var userChannels = useRef(null);
+  const [channel, setAllChannels] = useState([]);
 
   const { handleSubmit } = useForm({});
 
@@ -32,6 +34,20 @@ const Login = (props) => {
         console.log(loginHeaders);
         localStorage.setItem("loginHeaders", JSON.stringify(loginHeaders));
         localStorage.setItem("loginData", JSON.stringify(loginData));
+        console.log(localStorage.getItem("loginHeaders"));
+        axios({
+          url: `${API}/api/v1/channels`,
+          method: "GET",
+          headers: loginHeaders,
+        })
+          .then((response) => {
+            console.log("these are the channels")
+            userChannels = response.data;
+            console.log(userChannels);
+            localStorage.setItem("userChannels", JSON.stringify(userChannels));
+            setAllChannels(userChannels);
+          })
+          .catch((error) => console.log(error));
       })
       .catch(function (error) {
         console.log(error);

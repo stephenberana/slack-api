@@ -5,7 +5,6 @@ import AddChannel from "../AddChannel"
 import AddDM from "../AddDM"
 import Modal from "../../Modal/Modal"
 import ChannelsCollapsible from "../../Collapsible/ChannelsCollapsible"
-import DMCollapsible from "../../Collapsible/DMCollapsible"
 import '../../Collapsible/Collapsible.css';
 
 
@@ -26,7 +25,6 @@ const Sidebar = () => {
       <ChannelsCollapsible></ChannelsCollapsible>
       <div id="channel-list"></div>
       <button onClick={() => setShowDM(true)}>New Direct Message</button><Modal title="My Modal" onClose={() => setShowDM(false)} showDM={showDM}><AddDM /></Modal>
-      <DMCollapsible></DMCollapsible>
     </SidebarContainer>
   );
 };

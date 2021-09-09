@@ -5,38 +5,17 @@ import { UserContext } from "../../Context";
 import { API } from "../../App.js";
 import "./chatbox.css";
 
-var channelMessages = [];
 
  const ChatBox = (props) => {
-  const [data, setData] = useState([]);
-  useEffect(() => {
-    var channelMessages = [];
-    var receiver_id = localStorage.getItem("receiverkey");
-    var receiver_class = localStorage.getItem("receiverclass");
-    axios({
-      url: `${API}/api/v1/messages?receiver_id=${receiver_id}&receiver_class=${receiver_class}`,
-      method: "GET",
-      headers: userHeaders.data.headers,
-    })
-      .then((response) => {
-        channelMessages = response.data.data;
-        console.log(channelMessages);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  }, []);      
-
-    var userHeaders = useContext(UserContext);
-    console.log(userHeaders.data.headers)  
+    var chatboxMessageList = null;
     const body = useRef(null);
     const receiver_id = useRef(null);
     const receiver_class = useRef(null);
-    
   
     const { handleSubmit } = useForm({});
   
     const submitForm = (data) => {
+      var userHeaders = localStorage.getItem("loginHeaders");
       const message = {
         receiver_id: JSON.parse(localStorage.getItem("receiverkey")),
         receiver_class: localStorage.getItem("receiverclass"),
@@ -48,7 +27,7 @@ var channelMessages = [];
         url: `${API}/api/v1/messages?receiver_id=${message.receiver_id}&receiver_class=${message.receiver_class}&body=${message.body}`, 
         method: "POST",
         data: message,
-        headers: userHeaders.data.headers,
+        headers: userHeaders,
       })
         .then((response) => {
           console.log(response);
@@ -59,22 +38,20 @@ var channelMessages = [];
           console.log(error);
         });
     };
-
+  
+    var channelMessages = JSON.parse(localStorage.getItem("channelmessages"));
     var numberOfMessages = channelMessages.length
     var messageList = []
     for (let i = 0; i < numberOfMessages; i++) {
-      messageList.push(channelMessages.body[i])
-    }
-    const chatboxMessageList = messageList.map((message) =>
+      messageList.push(channelMessages[i])
+    chatboxMessageList = messageList.map((message) =>
     <div className="message" key={message.id} data-key={message.id}>
       {message.body}
-    </div>
-);
-
+    </div>)}
 
     return (
       <div className="channel-container">
-        <div className="channel-content">test.</div>
+        <div className="channel-content">{chatboxMessageList}</div>
         <div className="channel-send">
           <form onSubmit={handleSubmit(submitForm)}>
             <input

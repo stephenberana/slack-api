@@ -3,9 +3,11 @@ import React, {
   useState,
   createContext,
   useEffect,
+  useContext,
 } from "react";
 import axios from "axios";
 import { API } from "../../App.js";
+import { UserContext } from "../../Context";
 
 var userChannels = JSON.parse(localStorage.getItem("userChannels"));
 var numberOfChannels = userChannels.data.length
@@ -13,8 +15,6 @@ var channelList = []
 for (let i = 0; i < numberOfChannels; i++) {
     channelList.push(userChannels.data[i])
 }
-var selectedChannel = null;
-var selectedChannelName = null;
 
 const sidebarChannelList = channelList.map((channel) =>
 <div className="channel-name" key={channel.id} data-key={channel.id} channel-name={channel.name}>
@@ -22,7 +22,10 @@ const sidebarChannelList = channelList.map((channel) =>
 </div>
 );
 
- const GetChannelMessages = (e) => {
+var selectedChannel = null;
+var selectedChannelName = null; 
+
+ const GetChannelMessages = (e) => { 
   console.log(e.target.getAttribute('data-key'));
   selectedChannel = e.target.getAttribute('data-key');
   selectedChannelName = e.target.getAttribute('channel-name');
@@ -39,6 +42,8 @@ const sidebarChannelList = channelList.map((channel) =>
   })
     .then((response) => {
       console.log(response);
+      console.log(response.data.data)
+      localStorage.setItem("channelmessages", JSON.stringify(response.data.data))
     })
     .catch(function (error) {
       console.log(error);
@@ -47,7 +52,7 @@ const sidebarChannelList = channelList.map((channel) =>
 
  const ChannelList = (props) => {
     return (
-        <div className="channel-list" onClick={GetChannelMessages}>{sidebarChannelList}</div>
+        <div className="channel-list" onClick={GetChannelMessages}>{sidebarChannelList} </div>
     );
   };
 

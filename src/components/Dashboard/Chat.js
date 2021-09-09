@@ -5,13 +5,13 @@ import InfoOutlinedIcon from "@material-ui/icons/InfoOutlined";
 import ChatBox from "./ChatBox";
 import channelName from "./ChannelList"
 
-const Chat = (props) => {
+const Chat = () => {
   return (
-    <ChatContainer><br></br><br></br>
+    <ChatContainer><br></br>
       <Header>
         <HeaderLeft>
           <h4>
-            <strong>{props.channelname}</strong>
+            <strong></strong>
           </h4>
           <StarBorderOutlinedIcon />
         </HeaderLeft>
@@ -29,17 +29,16 @@ const Chat = (props) => {
 export default Chat;
 
 const ChatContainer = styled.div`
+  overflow-y: scroll;
   color: #000;
   margin-left: 220px;
   margin-right: 20px;
-  margin-top: 0px;
-  margin-bottom: 0px;
 `;
 
 const Header = styled.div`
   display: flex;
   justify-content: space-between;
-  padding: 20px;
+  padding: 10px;
   padding-top: 0px;
   border-bottom: 1px solid lightgray;
 `;
