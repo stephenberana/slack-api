@@ -19,7 +19,7 @@ for (i = 0; i < coll.length; i++) {
 const ChannelsCollapsible = () => {
     return (
         <div>
-<button className="collapsible">Channels</button><div className="content"><ChannelList /></div>
+<button className="collapsible">Channels</button><div className="content"><ChannelList />.</div>
 
         </div>
     )

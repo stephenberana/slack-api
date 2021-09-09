@@ -15,7 +15,7 @@ import "./chatbox.css";
     const { handleSubmit } = useForm({});
   
     const submitForm = (data) => {
-      var userHeaders = localStorage.getItem("loginHeaders");
+      var userHeaders = JSON.parse(localStorage.getItem("loginHeaders"));
       const message = {
         receiver_id: JSON.parse(localStorage.getItem("receiverkey")),
         receiver_class: localStorage.getItem("receiverclass"),
@@ -40,14 +40,21 @@ import "./chatbox.css";
     };
   
     var channelMessages = JSON.parse(localStorage.getItem("channelmessages"));
+
     var numberOfMessages = channelMessages.length
     var messageList = []
     for (let i = 0; i < numberOfMessages; i++) {
       messageList.push(channelMessages[i])
     chatboxMessageList = messageList.map((message) =>
     <div className="message" key={message.id} data-key={message.id}>
-      {message.body}
-    </div>)}
+      <div className="message-sender">sender: {message.sender.email.substring(0, message.sender.email.indexOf('@') != -1 ? message.sender.email.indexOf('@') : message.sender.email.length)}</div>
+      <div className="message-body">{message.body}</div>
+      <div className="message-timedate">time: {JSON.stringify(parseInt(JSON.stringify(message.created_at).slice(12,14))+8)}:{JSON.stringify(message.created_at).slice(15,17)} | date: {JSON.stringify(message.created_at).slice(1,11)}</div>
+    </div>
+    
+    )
+    
+  }
 
     return (
       <div className="channel-container">
