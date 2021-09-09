@@ -1,16 +1,17 @@
-import React from "react";
+import React, { useState, useEffect } from 'react';
 import styled from "styled-components";
 import StarBorderOutlinedIcon from "@material-ui/icons/StarBorderOutlined";
 import InfoOutlinedIcon from "@material-ui/icons/InfoOutlined";
-import ChatBox from "./ChatBox"
+import ChatBox from "./ChatBox";
+import channelName from "./ChannelList"
 
-const Chat = () => {
+const Chat = (props) => {
   return (
     <ChatContainer><br></br><br></br>
       <Header>
         <HeaderLeft>
           <h4>
-            <strong>#Room-name</strong>
+            <strong>{props.channelname}</strong>
           </h4>
           <StarBorderOutlinedIcon />
         </HeaderLeft>
@@ -28,10 +29,11 @@ const Chat = () => {
 export default Chat;
 
 const ChatContainer = styled.div`
-  overflow-y: scroll;
   color: #000;
   margin-left: 220px;
   margin-right: 20px;
+  margin-top: 0px;
+  margin-bottom: 0px;
 `;
 
 const Header = styled.div`

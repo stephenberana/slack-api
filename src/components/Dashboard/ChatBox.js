@@ -1,10 +1,32 @@
-import React, { useContext, useRef } from "react";
+import React, { useState, useEffect, useContext, useRef } from "react";
 import axios from "axios";
 import { useForm } from "react-hook-form";
 import { UserContext } from "../../Context";
 import { API } from "../../App.js";
+import "./chatbox.css";
+
+var channelMessages = [];
 
  const ChatBox = (props) => {
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    var channelMessages = [];
+    var receiver_id = localStorage.getItem("receiverkey");
+    var receiver_class = localStorage.getItem("receiverclass");
+    axios({
+      url: `${API}/api/v1/messages?receiver_id=${receiver_id}&receiver_class=${receiver_class}`,
+      method: "GET",
+      headers: userHeaders.data.headers,
+    })
+      .then((response) => {
+        channelMessages = response.data.data;
+        console.log(channelMessages);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }, []);      
+
     var userHeaders = useContext(UserContext);
     console.log(userHeaders.data.headers)  
     const body = useRef(null);
@@ -38,12 +60,23 @@ import { API } from "../../App.js";
         });
     };
 
+    var numberOfMessages = channelMessages.length
+    var messageList = []
+    for (let i = 0; i < numberOfMessages; i++) {
+      messageList.push(channelMessages.body[i])
+    }
+    const chatboxMessageList = messageList.map((message) =>
+    <div className="message" key={message.id} data-key={message.id}>
+      {message.body}
+    </div>
+);
+
+
     return (
       <div className="channel-container">
-        <div className="channel"></div>
-        <div className="channel">
+        <div className="channel-content">test.</div>
+        <div className="channel-send">
           <form onSubmit={handleSubmit(submitForm)}>
-            <label className="channel-label">Message</label>
             <input
               className="inputField"
               type="text"

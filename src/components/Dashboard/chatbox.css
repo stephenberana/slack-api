@@ -1,0 +1,40 @@
+.channel-content {
+    border: 1px solid red;
+    padding: 1%;
+    height: 62vh;
+}
+
+.channel-send form {
+    display: flex;
+    padding-bottom: 0px;
+    height: 8vh;
+}
+
+.channel-send button {
+    height: 100%;
+    width: fit-content;
+    padding: 1%;
+    background-color: #000;
+    outline: 0.1px solid #000
+}
+
+.channel-send input {
+    height: 100%;
+    padding: 1%;
+    border-radius: 1%;
+    border: 1px solid aqua;
+}
+
+.channel-send button:focus {
+    outline:none;
+    box-shadow: none !important;
+}
+
+.channel-container {
+    height: 70vh;
+}
+
+.channel-send {
+    padding: 0px;
+    line-height: 0px;
+}

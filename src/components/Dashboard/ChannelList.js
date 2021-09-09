@@ -14,9 +14,10 @@ for (let i = 0; i < numberOfChannels; i++) {
     channelList.push(userChannels.data[i])
 }
 var selectedChannel = null;
+var selectedChannelName = null;
 
 const sidebarChannelList = channelList.map((channel) =>
-<div className="channel-name" key={channel.id} data-key={channel.id}>
+<div className="channel-name" key={channel.id} data-key={channel.id} channel-name={channel.name}>
   {channel.name}
 </div>
 );
@@ -24,7 +25,9 @@ const sidebarChannelList = channelList.map((channel) =>
  const GetChannelMessages = (e) => {
   console.log(e.target.getAttribute('data-key'));
   selectedChannel = e.target.getAttribute('data-key');
+  selectedChannelName = e.target.getAttribute('channel-name');
   localStorage.setItem("receiverkey", selectedChannel);
+  localStorage.setItem("receivername", selectedChannelName);
   localStorage.setItem("receiverclass", "Channel");
   var {userHeaders, userData} = false;
   userHeaders = JSON.parse(localStorage.getItem("loginHeaders"));
