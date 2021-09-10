@@ -49,3 +49,62 @@
 .content {
   overflow: scroll;
 }
+
+.collapsible-dm {
+  background-color: #561621;
+  color: white;
+  cursor: pointer;
+  padding: 3%;
+  width: 100%;
+  border: none;
+  text-align: left;
+  font-size: 15px;
+  border-radius: 0;
+}
+
+.active, .collapsible-dm:hover {
+  background-color: #00573e;
+}
+
+.collapsible-dm:after {
+  content: '\002B';
+  color: white;
+  font-weight: bold;
+  float: right;
+  margin-left: 5px;
+}
+
+.active:after {
+  content: "\2212";
+}
+
+.content-dm {
+  padding: 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+  margin-top: -25px;
+  
+}
+
+.channel-list {
+  margin: 5%;
+  font-size: 15px;
+  font-family: 'Didact Gothic'
+}
+
+.dm-list {
+  margin: 5%;
+  font-size: 15px;
+  font-family: 'Didact Gothic'
+}
+
+
+.dm-name:hover {
+  background-color: #43111A;
+  cursor: pointer;
+}
+
+.content-dm {
+  overflow: scroll;
+}

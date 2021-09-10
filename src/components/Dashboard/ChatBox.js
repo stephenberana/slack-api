@@ -5,8 +5,29 @@ import { UserContext } from "../../Context";
 import { API } from "../../App.js";
 import "./chatbox.css";
 
- const ChatBox = (props) => {
+  var selectedChannel = localStorage.getItem("receiverkey");
+  var { userHeaders, userData } = false;
+  userHeaders = JSON.parse(localStorage.getItem("loginHeaders"));
+  userData = JSON.parse(localStorage.getItem("loginData"));
+  axios({
+    url: `http://206.189.91.54/api/v1/messages?receiver_id=${selectedChannel}&receiver_class=Channel`,
+    method: "GET",
+    headers: userHeaders,
+  })
+    .then((response) => {
+      console.log(response);
+      console.log(response.data.data);
+      localStorage.setItem(
+        "channelmessages",
+        JSON.stringify(response.data.data)
+      );
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
 
+ const ChatBox = (props) => {
+    var chatboxMessageList = null;
     const body = useRef(null);
     const receiver_id = useRef(null);
     const receiver_class = useRef(null);
@@ -37,10 +58,31 @@ import "./chatbox.css";
           console.log(error);
         });
     };
+  
+    var channelMessages = JSON.parse(localStorage.getItem("channelmessages"));
+
+    var numberOfMessages = channelMessages.length
+    var messageList = []
+    for (let i = 0; i < numberOfMessages; i++) {
+      messageList.push(channelMessages[i])
+    chatboxMessageList = messageList.map((message) =>
+    <div className="message" key={message.id} data-key={message.id}>
+      <div className="message-top">
+      <div className="message-avatarsender">
+      <div className="message-avatar"></div>
+      <div className="message-sender">{message.sender.email.substring(0, message.sender.email.indexOf('@') != -1 ? message.sender.email.indexOf('@') : message.sender.email.length)}</div>
+      </div>
+      <div className="message-timedate">{JSON.stringify(parseInt(JSON.stringify(message.created_at).slice(12,14))+8)}:{JSON.stringify(message.created_at).slice(15,17)}</div>
+      </div>
+      <div className="message-body">{message.body}</div>
+    </div>
+    
+    )    
+  }
+
     return (
       <div className="channel-container">
-        <div className="channel-content">test
-        </div>
+        <div className="channel-content">{chatboxMessageList}</div>
         <div className="channel-send">
           <form onSubmit={handleSubmit(submitForm)}>
             <input
@@ -60,4 +102,3 @@ import "./chatbox.css";
   };
 
   export default ChatBox;
-     

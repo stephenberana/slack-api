@@ -3,14 +3,17 @@ import styled from "styled-components";
 import CreateIcon from "@material-ui/icons/Create";
 import AddChannel from "../AddChannel"
 import AddDM from "../AddDM"
-import Modal from "../../Modal/Modal"
-import ChannelsCollapsible from "../../Collapsible/ChannelsCollapsible"
+import CheckDM from "../CheckDM"
+import ModalChannel from "../../Modal/ModalChannel"
+import ModalDM from "../../Modal/ModalDM"
+import ModalDMList from "../../Modal/ModalDMList"
+import ChannelList from "../ChannelList"
 import '../../Collapsible/Collapsible.css';
 
-
 const Sidebar = () => {
-  const [show, setShow] = useState(false);
-  const [showDM, setShowDM] = useState(false);
+  const [showchannel, setShowChannel] = useState(false);
+  const [showdm, setShowDM] = useState(false);
+  const [showdmlist, setShowDMList] = useState(false);
 
   return (
     <SidebarContainer>
@@ -20,10 +23,11 @@ const Sidebar = () => {
         </SidebarInfo>
         <CreateIcon />
       </SidebarHeader>
-      <button onClick={() => setShow(true)}>Add Channel</button><Modal title="Add Channel" onClose={() => setShow(false)} show={show}><AddChannel /></Modal>
-      <ChannelsCollapsible />
+      <button onClick={() => setShowChannel(true)}>New Channel</button><ModalChannel title="Add Channel" onClose={() => setShowChannel(false)} showchannel={showchannel}><AddChannel /></ModalChannel>
+      <ChannelList />
       <div id="channel-list"></div>
-      <button onClick={() => setShowDM(true)}>New Direct Message</button><Modal title="My Modal" onClose={() => setShowDM(false)} showDM={showDM}><AddDM /></Modal>
+      <button onClick={() => setShowDM(true)}>New Direct Message</button><ModalDM title="DM Another User" onClose={() => setShowDM(false)} showdm={showdm}><AddDM /></ModalDM>
+      <button onClick={() => setShowDMList(true)}>Check DMs</button><ModalDMList title="Check DMs" onClose={() => setShowDMList(false)} showdmlist={showdmlist}><CheckDM /></ModalDMList>
     </SidebarContainer>
   );
 };

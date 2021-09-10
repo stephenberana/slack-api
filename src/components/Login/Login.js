@@ -6,7 +6,6 @@ import { API } from "../../App";
 import { useHistory, Link } from "react-router-dom";
 
 window.reload = localStorage.setItem("userChannels", '[0,1,2,3,4]')
-window.reload = localStorage.setItem("channelmessages", '[0,1,2,3,4]')
 
 const Login = (props) => {
   let history = useHistory();

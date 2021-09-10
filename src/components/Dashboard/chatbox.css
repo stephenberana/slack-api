@@ -15,16 +15,23 @@
     height: 100%;
     width: fit-content;
     padding: 1%;
-    background-color: #000;
-    outline: 0.1px solid #000
+    background-color: #0F2F1D;
+    outline: 1px solid #000
 }
 
 .channel-send input {
     height: 100%;
     padding: 1%;
     border-radius: 1%;
-    border: 1px solid aqua;
+    border: 2px solid #0F2F1D;
+    background-color: #0F2F1D;
+    color: #FFF;
 }
+
+.channel-send input::placeholder {
+    color: #FFF;
+}
+
 
 .channel-send button:focus {
     outline:none;
@@ -39,3 +46,43 @@
     padding: 0px;
     line-height: 0px;
 }
+
+.message {
+    background-color: #7a111134;
+    padding: 1%;
+    margin: 1%;
+  }
+
+.message-top {
+    display: flex;
+    justify-content: space-between;
+}
+
+.message-avatarsender {
+    display: flex;
+    margin-bottom: 5px;
+}
+
+.message-avatar {
+    width: 4vmin;
+    height: 4vmin;
+    border-radius: 4vmin;
+    background-color: white;
+    margin-right: 10px;
+}
+  
+.message-sender {
+    height: 4vmin;
+    color: #7A1111;
+    font-size: 2.5vmin;
+    font-weight: bold;
+  }
+  
+.message-body {
+    font-size: 2.2vmin;
+  }
+  
+.message-timedate{
+    font-size: 2vmin;
+  }
+  

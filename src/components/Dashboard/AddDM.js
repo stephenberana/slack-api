@@ -1,72 +1,85 @@
 import React, { useContext, useRef } from "react";
 import axios from "axios";
-import styled from "styled-components";
 import { useForm } from "react-hook-form";
 import { UserContext } from "../../Context";
 import { API } from "../../App.js";
 
  const AddDM = (props) => {
-    const { data } = useContext(UserContext);
-    var userHeaders = useContext(UserContext);
-    var channelList = [];
-    console.log(userHeaders.data.headers)  
-    const name = useRef(null);
-    const user_ids = useRef(null);
+   
+    var userHeaders = JSON.parse(localStorage.getItem("loginHeaders"))
+    const receiver_id = useRef(null);
+    const body = useRef(null);
   
     const { handleSubmit } = useForm({});
   
     const submitForm = (data) => {
-      const channel = {
-        name: name.current.value,
-        user_ids: JSON.parse("[" + user_ids.current.value + "]")
+      var userHeaders = JSON.parse(localStorage.getItem("loginHeaders"));
+      const message = {
+        receiver_id: receiver_id.current.value,
+        receiver_class: "User",
+        body: body.current.value,
       };
-      console.log(channel);
+      console.log(message);
   
       axios({
-        url: `${API}/api/v1/channels`, 
+        url: `${API}/api/v1/messages?receiver_id=${message.receiver_id}&receiver_class=${message.receiver_class}&body=${message.body}`, 
         method: "POST",
-        data: channel,
-        headers: userHeaders.data.headers,
+        data: message,
+        headers: userHeaders,
       })
         .then((response) => {
           console.log(response);
-          console.log(channel);
-          channelList.push(response);
-          console.log(channelList)
+          console.log(message);
+          axios({
+            url: `http://206.189.91.54/api/v1/messages?receiver_id=${message.receiver_id}&receiver_class=User`, 
+            method: "GET",
+            data: message,
+            headers: userHeaders,
+          })
+            .then((response) => {
+              console.log(message.receiver_id)
+              console.log(response);
+              console.log(response.data.data)
+            })
+            .catch(function (error) {
+              console.log("errorrr")
+              console.log(error);
+            });
+        
         })
         .catch(function (error) {
           console.log("errorrr")
           console.log(error);
         });
-    };
 
+    }
     return (
       <div className="channel-container">
         <div className="channel"></div>
         <div className="channel">
-          <form className="form" onSubmit={handleSubmit(submitForm)}>
-            <label className="channel-label">Channel</label>
+          <form onSubmit={handleSubmit(submitForm)}>
+            <label className="channel-label">User</label>
             <input
               style={{ marginTop: "16px" }}
               className="inputField"
               type="text"
-              name="name"
-              ref={name}
-              placeholder="Enter channel name."
+              name="receiver_id"
+              ref={receiver_id}
+              placeholder="Enter user ID."
             />
             <br />
   
-            <label className="channel-label">Name</label>
+            <label className="channel-label">Message</label>
             <input
               className="inputField"
               type="text"
-              name="user_ids"
-              ref={user_ids}
-              placeholder="Input user IDs"
+              name="body"
+              ref={body}
+              placeholder="Say hi!"
             />
   
             <button className="channel-submit" type="submit">
-              Submit
+              Send DM!
             </button>
           </form>
         </div>
