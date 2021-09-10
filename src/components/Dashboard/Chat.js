@@ -4,6 +4,7 @@ import StarBorderOutlinedIcon from "@material-ui/icons/StarBorderOutlined";
 import InfoOutlinedIcon from "@material-ui/icons/InfoOutlined";
 import ChatBox from "./ChatBox";
 import useLocalStorage from "use-local-storage";
+import AddUserToChannel from "./AddUserToChannel"
 
 const Chat = () => {
   const roomId = useLocalStorage("id");
@@ -23,7 +24,7 @@ const Chat = () => {
         </HeaderLeft>
         <HeaderRight>
           <p>
-            <InfoOutlinedIcon /> Details
+          <AddUserToChannel />
           </p>
         </HeaderRight>
       </Header>

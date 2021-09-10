@@ -6,7 +6,6 @@ import { API } from "../../App.js";
 
  const AddDM = (props) => {
    
-    var userHeaders = JSON.parse(localStorage.getItem("loginHeaders"))
     const receiver_id = useRef(null);
     const body = useRef(null);
   
