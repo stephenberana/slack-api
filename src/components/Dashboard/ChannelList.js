@@ -7,32 +7,44 @@ import React, {
 } from "react";
 import axios from "axios";
 import { API } from "../../App.js";
-import { UserContext } from "../../Context";
 
 var userChannels = JSON.parse(localStorage.getItem("userChannels"));
-var numberOfChannels = userChannels.data.length
-var channelList = []
-for (let i = 0; i < numberOfChannels; i++) {
-    channelList.push(userChannels.data[i])
+if ((userChannels = null)) {
+  console.log("user channels not found");
 }
 
-const sidebarChannelList = channelList.map((channel) =>
-<div className="channel-name" key={channel.id} data-key={channel.id} channel-name={channel.name}>
-  {channel.name}
-</div>
-);
+var numberOfChannels = userChannels.data.length;
+var channelList = [];
+for (let i = 0; i < numberOfChannels; i++) {
+  if (channelList === "0") {
+    console.log("There are no channels.");
+  } else {
+    channelList.push(userChannels.data[i]);
+  }
+}
+
+const sidebarChannelList = channelList.map((channel) => (
+  <div
+    className="channel-name"
+    key={channel.id}
+    data-key={channel.id}
+    channel-name={channel.name}
+  >
+    {channel.name}
+  </div>
+));
 
 var selectedChannel = null;
-var selectedChannelName = null; 
+var selectedChannelName = null;
 
- const GetChannelMessages = (e) => { 
-  console.log(e.target.getAttribute('data-key'));
-  selectedChannel = e.target.getAttribute('data-key');
-  selectedChannelName = e.target.getAttribute('channel-name');
+const GetChannelMessages = (e) => {
+  console.log(e.target.getAttribute("data-key"));
+  selectedChannel = e.target.getAttribute("data-key");
+  selectedChannelName = e.target.getAttribute("channel-name");
   localStorage.setItem("receiverkey", selectedChannel);
   localStorage.setItem("receivername", selectedChannelName);
   localStorage.setItem("receiverclass", "Channel");
-  var {userHeaders, userData} = false;
+  var { userHeaders, userData } = false;
   userHeaders = JSON.parse(localStorage.getItem("loginHeaders"));
   userData = JSON.parse(localStorage.getItem("loginData"));
   axios({
@@ -42,20 +54,23 @@ var selectedChannelName = null;
   })
     .then((response) => {
       console.log(response);
-      console.log(response.data.data)
-      localStorage.setItem("channelmessages", JSON.stringify(response.data.data))
+      console.log(response.data.data);
+      localStorage.setItem(
+        "channelmessages",
+        JSON.stringify(response.data.data)
+      );
     })
     .catch(function (error) {
       console.log(error);
     });
-  }
+};
 
- const ChannelList = (props) => {
-    return (
-        <div className="channel-list" onClick={GetChannelMessages}>{sidebarChannelList} </div>
-    );
-  };
+const ChannelList = (props) => {
+  return (
+    <div className="channel-list" onClick={GetChannelMessages}>
+      {sidebarChannelList}{" "}
+    </div>
+  );
+};
 
-  export default ChannelList;
-
-  
+export default ChannelList;
