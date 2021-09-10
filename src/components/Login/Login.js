@@ -5,6 +5,9 @@ import "./login-registration.css";
 import { API } from "../../App";
 import { useHistory, Link } from "react-router-dom";
 
+window.reload = localStorage.setItem("userChannels", '[0,1,2,3,4]')
+window.reload = localStorage.setItem("channelmessages", '[0,1,2,3,4]')
+
 const Login = (props) => {
   let history = useHistory();
   const email = useRef(null);
@@ -17,8 +20,8 @@ const Login = (props) => {
 
   const submitForm = (data) => {
     const user = {
-      email: data.email,
-      password: data.password,
+      email: email.current.value,
+      password: password.current.value,
     };
     console.log(user);
 
@@ -29,7 +32,7 @@ const Login = (props) => {
       headers: config,
     })
       .then((response) => {
-        console.log(response);
+        console.log(response)
         loginHeaders = response.headers;
         loginData = response.data;
         console.log(loginHeaders);
@@ -42,18 +45,35 @@ const Login = (props) => {
           headers: loginHeaders,
         })
           .then((response) => {
-            console.log("these are the channels");
-            userChannels = response.data;
+            console.log("these are the channels")
+            userChannels = response.data.data;
             console.log(userChannels);
             localStorage.setItem("userChannels", JSON.stringify(userChannels));
             setAllChannels(userChannels);
-          })
+            axios({
+              url: `${API}/api/v1/messages?receiver_id=${userChannels[0].id}&receiver_class=Channel`,
+              method: "GET",
+              headers: loginHeaders,
+            })
+              .then((response) => {
+                console.log(response);
+                console.log(response.data.data);
+                localStorage.setItem(
+                  "channelmessages",
+                  JSON.stringify(response.data.data)
+                );
+                history.push("dashboard");
+              })
+              .catch(function (error) {
+                console.log(error);
+              });
+                    })
           .catch((error) => console.log(error));
       })
       .catch(function (error) {
         console.log(error);
       });
-    history.push("dashboard");
+      history.push("dashboard");
   };
 
   const config = {
@@ -62,7 +82,7 @@ const Login = (props) => {
       Accept: "application/json",
     },
   };
-
+  
   return (
     <div className="login-container">
       <div className="column1"></div>

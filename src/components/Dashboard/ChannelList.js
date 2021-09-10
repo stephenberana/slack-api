@@ -7,37 +7,43 @@ import React, {
 } from "react";
 import axios from "axios";
 import { API } from "../../App.js";
+ 
+var sidebarChannelList = null;
 
-var userChannels = JSON.parse(localStorage.getItem("userChannels"));
-if ((userChannels = null)) {
-  console.log("user channels not found");
+var userChannels = [];
+var userChannelsLength = 0;
+var userHeaders = null;
+var userChannels = null;
+userHeaders = JSON.parse(localStorage.getItem("loginHeaders"));
+
+axios({
+  url: `http://206.189.91.54/api/v1/channels`,
+  method: "GET",
+  headers: userHeaders,
+})
+  .then((response) => {
+    console.log("these are the channels")
+    userChannels = response.data.data;
+    console.log(userChannels);
+    localStorage.setItem("userChannels", JSON.stringify(userChannels));
+    userChannelsLength = userChannels.length;
+    console.log(userChannels)
+    var channelList = []
+for (let i = 0; i < userChannelsLength; i++) {
+    channelList.push(userChannels[i])
 }
 
-var numberOfChannels = userChannels.data.length;
-var channelList = [];
-for (let i = 0; i < numberOfChannels; i++) {
-  if (channelList === "0") {
-    console.log("There are no channels.");
-  } else {
-    channelList.push(userChannels.data[i]);
-  }
-}
-
-const sidebarChannelList = channelList.map((channel) => (
-  <div
-    className="channel-name"
-    key={channel.id}
-    data-key={channel.id}
-    channel-name={channel.name}
-  >
-    {channel.name}
-  </div>
-));
-
-var selectedChannel = null;
-var selectedChannelName = null;
+sidebarChannelList = channelList.map((channel) =>
+<div className="channel-name" key={channel.id} data-key={channel.id} channel-name={channel.name}>
+  {channel.name}
+</div>
+);
+    })
+  .catch((error) => console.log(error));
 
 const GetChannelMessages = (e) => {
+var selectedChannel = null;
+var selectedChannelName = null;
   console.log(e.target.getAttribute("data-key"));
   selectedChannel = e.target.getAttribute("data-key");
   selectedChannelName = e.target.getAttribute("channel-name");

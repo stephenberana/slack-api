@@ -11,7 +11,6 @@ import '../../Collapsible/Collapsible.css';
 const Sidebar = () => {
   const [show, setShow] = useState(false);
   const [showDM, setShowDM] = useState(false);
-  const [collapse, setCollapse] = useState(true);
 
   return (
     <SidebarContainer>
@@ -22,7 +21,7 @@ const Sidebar = () => {
         <CreateIcon />
       </SidebarHeader>
       <button onClick={() => setShow(true)}>Add Channel</button><Modal title="Add Channel" onClose={() => setShow(false)} show={show}><AddChannel /></Modal>
-      <ChannelsCollapsible></ChannelsCollapsible>
+      <ChannelsCollapsible />
       <div id="channel-list"></div>
       <button onClick={() => setShowDM(true)}>New Direct Message</button><Modal title="My Modal" onClose={() => setShowDM(false)} showDM={showDM}><AddDM /></Modal>
     </SidebarContainer>

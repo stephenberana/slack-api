@@ -7,6 +7,22 @@ import Header from "./Header";
 import styled from "styled-components";
 import Chat from "./Chat";
 
+var userHeaders = null;
+var userChannels = null;
+userHeaders = JSON.parse(localStorage.getItem("loginHeaders"));
+axios({
+  url: `http://206.189.91.54/api/v1/channels`,
+  method: "GET",
+  headers: userHeaders,
+})
+  .then((response) => {
+    console.log("these are the channels")
+    userChannels = response.data.data;
+    console.log(userChannels);
+    localStorage.setItem("userChannels", JSON.stringify(userChannels));
+    })
+  .catch((error) => console.log(error));
+
 const Dashboard = (props) => {
   return (
     <DashBody>

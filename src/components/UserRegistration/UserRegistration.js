@@ -9,6 +9,8 @@ export default function UserRegistration(props) {
   const email = useRef(null);
   const password = useRef(null);
   const password_confirmation = useRef(null);
+  var loginHeaders = useRef(null);
+  var loginData = useRef(null);
   const { handleSubmit } = useForm();
 
   const submitForm = (data) => {
@@ -27,6 +29,13 @@ export default function UserRegistration(props) {
       .then((response) => {
         console.log(response);
         console.log(data);
+        console.log(response)
+        loginHeaders = response.headers;
+        loginData = response.data;
+        console.log(loginHeaders);
+        localStorage.setItem("loginHeaders", JSON.stringify(loginHeaders));
+        localStorage.setItem("loginData", JSON.stringify(loginData));
+        console.log(localStorage.getItem("loginHeaders"));
       })
       .catch(function (error) {
         console.log(error);
@@ -85,7 +94,7 @@ export default function UserRegistration(props) {
         />
 
         <span>
-          Already a member? <a href="./">Login here.</a>
+          Already a member? <a href="./login">Login here.</a>
         </span>
         <button className="register-submit" type="submit">
           Submit

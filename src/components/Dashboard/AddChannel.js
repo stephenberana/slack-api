@@ -8,6 +8,8 @@ import { API } from "../../App.js";
     var userHeaders = useContext(UserContext);
     var channelList = [];
     console.log(userHeaders.data.headers)  
+    var loginData = JSON.parse(localStorage.getItem("loginData"))
+    var ownID = loginData.data.id;
     const name = useRef(null);
     const user_ids = useRef(null);
   
@@ -16,7 +18,7 @@ import { API } from "../../App.js";
     const submitForm = (data) => {
       const channel = {
         name: name.current.value,
-        user_ids: JSON.parse("[" + user_ids.current.value + "]")
+        user_ids: JSON.parse("[" + user_ids.current.value + ownID + "]")
       };
       console.log(channel);
   

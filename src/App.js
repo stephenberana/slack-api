@@ -7,7 +7,6 @@ import { UserContextProvider } from "./Context";
 import "./App.css";
 
 export const API = "http://206.189.91.54";
-
 export default function App() {
   return (
     <div className="app">
@@ -16,7 +15,7 @@ export default function App() {
           <Route path="/login">
             <Login />
           </Route>
-          <Route path="register-link">
+          <Route path="/register-link">
             <UserRegistration />
           </Route>
           <UserContextProvider>
