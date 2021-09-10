@@ -21,7 +21,7 @@ import ModalAddUser from "../Modal/ModalAddUser"
       console.log(userHeaders)
   
       axios({
-        url: `${API}/api/v1/add_member?id=${selectedChannel}&member_id=${user.member_id}`,
+        url: `http://206.189.91.54/api/v1/channel/add_member?id=${selectedChannel}&member_id=${user.member_id}`,
         method: "POST",
         data: user,
         headers: userHeaders,
