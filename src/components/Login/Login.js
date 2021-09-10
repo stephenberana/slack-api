@@ -3,21 +3,22 @@ import axios from "axios";
 import { useForm } from "react-hook-form";
 import "./login-registration.css";
 import { API } from "../../App";
+import { useHistory, Link } from "react-router-dom";
 
 const Login = (props) => {
+  let history = useHistory();
   const email = useRef(null);
   const password = useRef(null);
   var loginHeaders = useRef(null);
   var loginData = useRef(null);
   var userChannels = useRef(null);
   const [channel, setAllChannels] = useState([]);
-
-  const { handleSubmit } = useForm({});
+  const { register, handleSubmit } = useForm({});
 
   const submitForm = (data) => {
     const user = {
-      email: email.current.value,
-      password: password.current.value,
+      email: data.email,
+      password: data.password,
     };
     console.log(user);
 
@@ -28,7 +29,7 @@ const Login = (props) => {
       headers: config,
     })
       .then((response) => {
-        console.log(response)
+        console.log(response);
         loginHeaders = response.headers;
         loginData = response.data;
         console.log(loginHeaders);
@@ -41,7 +42,7 @@ const Login = (props) => {
           headers: loginHeaders,
         })
           .then((response) => {
-            console.log("these are the channels")
+            console.log("these are the channels");
             userChannels = response.data;
             console.log(userChannels);
             localStorage.setItem("userChannels", JSON.stringify(userChannels));
@@ -52,6 +53,7 @@ const Login = (props) => {
       .catch(function (error) {
         console.log(error);
       });
+    history.push("dashboard");
   };
 
   const config = {

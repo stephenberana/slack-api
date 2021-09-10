@@ -1,13 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import StarBorderOutlinedIcon from "@material-ui/icons/StarBorderOutlined";
 import InfoOutlinedIcon from "@material-ui/icons/InfoOutlined";
 import ChatBox from "./ChatBox";
-import channelName from "./ChannelList"
+import useLocalStorage from "use-local-storage";
 
 const Chat = () => {
+  const roomId = useLocalStorage("id");
+  const channelName = useLocalStorage("name");
+  console.log(roomId);
+  console.log(channelName);
+
   return (
-    <ChatContainer><br></br>
+    <ChatContainer>
+      <br></br>
       <Header>
         <HeaderLeft>
           <h4>
@@ -21,7 +27,8 @@ const Chat = () => {
           </p>
         </HeaderRight>
       </Header>
-      <ChatBox />
+      <ChatMessages>{/* List all messages */}</ChatMessages>
+      <ChatBox channelName={channelName} channelId={roomId} />
     </ChatContainer>
   );
 };
@@ -57,3 +64,5 @@ const HeaderLeft = styled.div`
 `;
 
 const HeaderRight = styled.div``;
+
+const ChatMessages = styled.div``;
