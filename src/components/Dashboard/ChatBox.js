@@ -63,9 +63,9 @@ import "./chatbox.css";
 
     var numberOfMessages = channelMessages.length
     var messageList = []
-    for (let i = 0; i < numberOfMessages; i++) {
-      messageList.push(channelMessages[i])
-    chatboxMessageList = messageList.map((message) =>
+    for (let i = 0; i < numberOfMessages; i++) {messageList.push(channelMessages[i])}
+    messageList = messageList.reverse()
+    chatboxMessageList = messageList.map((message) => 
     <div className="message" key={message.id} data-key={message.id}>
       <div className="message-top">
       <div className="message-avatarsender">
@@ -78,7 +78,6 @@ import "./chatbox.css";
     </div>
     
     )    
-  }
 
     return (
       <div className="channel-container">

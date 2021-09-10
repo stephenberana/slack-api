@@ -24,7 +24,7 @@
   
   .modal-content {
     width: 80vw;
-    height: 80vh;
+    height: fit-content;
     max-width: 500px;
     background-color: #fff;
     transition: all 0.3s ease-in-out;

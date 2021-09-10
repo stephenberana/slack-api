@@ -40,7 +40,8 @@ import { API } from "../../App.js";
     console.log(allDMs);
     var messageList = [];
     for (let i = 0; i < allDMs.length; i++) {
-      messageList.push(allDMs[i])
+      messageList.push(allDMs[i])}
+    messageList = messageList.reverse()
     dmMessageList = messageList.map((dm) =>
     <div className="message" key={dm.id} data-key={dm.id}>
       <div className="message-top">
@@ -49,7 +50,7 @@ import { API } from "../../App.js";
       </div>
       <div className="message-body">{dm.body}</div>
     </div>
-    )}
+    )
     console.log(dmMessageList)      
 
 
